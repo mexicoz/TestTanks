@@ -1,24 +1,19 @@
 
 using UnityEngine;
 
-public class PlayerView : MonoBehaviour, ITankView
+public class TankView : MonoBehaviour
 {
-    PlayerPresenter _presenter;
-    PlayerModel _model;
+    TankPresenter _presenter;
+
+    [SerializeField] private int _speed;
 
     private void Awake()
     {
-        _model = new PlayerModel();
-        _presenter = new PlayerPresenter(_model, this);
+        _presenter = new TankPresenter(this);
         _presenter.Subscribe();
     }
 
-    public void Moving(int speed)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Fire()
+    public virtual void Moving(int speed)
     {
         throw new System.NotImplementedException();
     }

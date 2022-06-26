@@ -543,7 +543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3304aec670d639b49851a9c1acf1a8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerView: {fileID: -3587876601444730954, guid: 18bf61e8a4d3224428d1eb65d939d4e4, type: 3}
+  _player: {fileID: 823067563179371268, guid: 18bf61e8a4d3224428d1eb65d939d4e4, type: 3}
+  _enemy: []
   _enemyPrefab: {fileID: 0}
   _spawnPoints:
   - {fileID: 484929831}

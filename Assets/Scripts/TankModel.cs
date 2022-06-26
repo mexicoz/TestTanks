@@ -2,7 +2,7 @@
 
 using System;
 
-public class PlayerModel
+public class TankModel
 {
     public event Action Death;
     public event Action<int> SetCurrentHp;
@@ -10,7 +10,7 @@ public class PlayerModel
     private int _maxHp = 10;
     private int _currentHp;
 
-    public PlayerModel()
+    public TankModel()
     {
         _currentHp = _maxHp;
     }

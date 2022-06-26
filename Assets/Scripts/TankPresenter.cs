@@ -1,14 +1,14 @@
 
 
-public class PlayerPresenter
+public class TankPresenter
 {
 
-    private PlayerModel _playerModel;
-    private PlayerView _playerView;
+    private TankModel _playerModel = new TankModel();
+    private TankView _playerView;
 
-    public PlayerPresenter(PlayerModel model, PlayerView view)
+    public TankPresenter(TankView view)
     {
-        _playerModel = model;
+        
         _playerView = view;
     }
     public void Subscribe()

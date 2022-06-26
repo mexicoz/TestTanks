@@ -3,19 +3,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private PlayerView _playerView;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private TankView[] _enemy;
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject[] _spawnPoints;
-    private PlayerPresenter _playerPresenter;
-    private PlayerModel _playerModel;
 
     private void Start()
-    {
-        _playerModel = new PlayerModel();
+    {        
 
-        _playerPresenter = new PlayerPresenter(_playerModel, _playerView);
-
-        var playerObject = Instantiate(_playerView, ShoosSpawnPoint(), Quaternion.identity);
+        Instantiate(_player, ShoosSpawnPoint(), Quaternion.identity);
     }
     Vector3 ShoosSpawnPoint()
     {

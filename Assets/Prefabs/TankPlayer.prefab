@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3094092789508839790}
   - component: {fileID: 208422374472405059}
   - component: {fileID: 3464886719797735832}
-  - component: {fileID: -3587876601444730954}
+  - component: {fileID: 5646106583162957947}
   m_Layer: 0
   m_Name: TankPlayer
   m_TagString: Untagged
@@ -193,7 +193,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3587876601444730954
+--- !u!114 &5646106583162957947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,9 +202,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 823067563179371268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4f58d396a39c440a2ca27596384724, type: 3}
+  m_Script: {fileID: 11500000, guid: afc8ba9342c39d6439310c494b815f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0
 --- !u!1 &3052836598017032967
 GameObject:
   m_ObjectHideFlags: 0
