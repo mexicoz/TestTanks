@@ -9,4 +9,8 @@ public class Player : TankView
     {
         base.Moving(speed);
     }
+    private void Update()
+    {
+        Moving(speed);
+    }
 }

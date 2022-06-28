@@ -4,9 +4,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
-    [SerializeField] private TankView[] _enemy;
-    [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private GameObject[] _spawnPoints;
+    [SerializeField] private GameObject _enemy;
+    [SerializeField] private GameObject[] _spawnPointsPlayer;
+    [SerializeField] private GameObject[] _spawnPointsEnemy;
 
     private void Start()
     {        
@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     }
     Vector3 ShoosSpawnPoint()
     {
-        var element = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+        var element = _spawnPointsPlayer[Random.Range(0, _spawnPointsPlayer.Length)];
 
         return element.transform.position;
     }

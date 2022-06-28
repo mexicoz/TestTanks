@@ -5,17 +5,37 @@ public class TankView : MonoBehaviour
 {
     TankPresenter _presenter;
 
-    [SerializeField] private int _speed;
+    public int speed;
+    public int rotateSpeed;
 
     private void Awake()
     {
         _presenter = new TankPresenter(this);
         _presenter.Subscribe();
     }
+    private void Update()
+    {
+        Moving(speed);
+    }
 
     public virtual void Moving(int speed)
     {
-        throw new System.NotImplementedException();
+        float xDirect = Input.GetAxis("Horizontal");
+        float zDirect = Input.GetAxis("Vertical");
+
+        Vector3 moveDirect = new Vector3(xDirect, 0.0f, zDirect);
+        moveDirect.Normalize();
+        
+
+        transform.position += moveDirect * speed * Time.deltaTime;
+        
+        if(moveDirect != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirect, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,
+                targetRotation, rotateSpeed * Time.deltaTime);
+        }
+        
     }
     public void Death()
     {

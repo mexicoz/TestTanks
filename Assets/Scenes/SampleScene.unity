@@ -544,13 +544,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 823067563179371268, guid: 18bf61e8a4d3224428d1eb65d939d4e4, type: 3}
-  _enemy: []
-  _enemyPrefab: {fileID: 0}
-  _spawnPoints:
+  _enemy: {fileID: 823067563179371268, guid: b22e2d1cdb2f9d04dbe8f11574088881, type: 3}
+  _spawnPointsPlayer:
   - {fileID: 484929831}
   - {fileID: 772190078}
   - {fileID: 416518891}
   - {fileID: 1029728033}
+  _spawnPointsEnemy: []
 --- !u!4 &1954601642
 Transform:
   m_ObjectHideFlags: 0
