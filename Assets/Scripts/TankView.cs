@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class TankView : MonoBehaviour
+public class TankView : MonoBehaviour, IMovingControl
 {
     TankPresenter _presenter;
 
@@ -15,17 +15,21 @@ public class TankView : MonoBehaviour
     }
     private void Update()
     {
-        Moving(speed);
+        MovingControl(speed);
     }
 
-    public virtual void Moving(int speed)
+    public virtual void MovingControl(int speed)
     {
         float xDirect = Input.GetAxis("Horizontal");
         float zDirect = Input.GetAxis("Vertical");
 
+        Moving(speed, xDirect, zDirect);
+    }
+
+    public void Moving(int speed, float xDirect, float zDirect )
+    {
         Vector3 moveDirect = new Vector3(xDirect, 0.0f, zDirect);
-        moveDirect.Normalize();
-        
+        moveDirect.Normalize();        
 
         transform.position += moveDirect * speed * Time.deltaTime;
         
@@ -34,8 +38,7 @@ public class TankView : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(moveDirect, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation,
                 targetRotation, rotateSpeed * Time.deltaTime);
-        }
-        
+        }        
     }
     public void Death()
     {

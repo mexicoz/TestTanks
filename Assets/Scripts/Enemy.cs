@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Enemy : TankView
 {
-    public override void Moving(int speed)
+    IMovingControl control;
+    private void Start()
     {
-        base.Moving(speed);
+        control = GetComponent<IMovingControl>();
+    }
+    public override void MovingControl(int speed)
+    {
+        float xDirect = 0;
+        float zDirect = 1;
+        
+        control.Moving(speed, xDirect, zDirect);
     }
 }

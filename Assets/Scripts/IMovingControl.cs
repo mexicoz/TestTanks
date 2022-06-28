@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : TankView
+interface IMovingControl
 {
-   
+    void Moving(int speed, float xDirect, float zDirect);
 }
