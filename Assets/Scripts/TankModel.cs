@@ -6,6 +6,7 @@ public class TankModel
 {
     public event Action Death;
     public event Action<int> SetCurrentHp;
+    public event Action Fire;
 
     private int _maxHp = 10;
     private int _currentHp;
@@ -22,5 +23,9 @@ public class TankModel
             SetCurrentHp?.Invoke(_currentHp);
         else
             Death?.Invoke();
+    }
+    public void StartFire()
+    {
+        Fire?.Invoke();
     }
 }

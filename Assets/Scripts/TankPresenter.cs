@@ -15,11 +15,13 @@ public class TankPresenter
     {
         _playerModel.Death += Death;
         _playerModel.SetCurrentHp += SetHp;
+        _playerModel.Fire += Fire; 
     }
     public void Unsubscribe()
     {
         _playerModel.Death -= Death;
         _playerModel.SetCurrentHp -= SetHp;
+        _playerModel.Fire -= Fire;
     }
 
     public void SetDamage(int hp)
@@ -30,10 +32,18 @@ public class TankPresenter
     {
         _playerView.SetHp(hp);
     }
+    public void StartFire()
+    {
+        _playerModel.StartFire();
+    }
     private void Death()
     {
         _playerView.Death();
         Unsubscribe();
+    }
+    public void Fire()
+    {
+        _playerView.Fire();
     }
 
 }

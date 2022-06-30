@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Player : TankView
 {
-   
+    private void OnCollisionEnter(Collision collision)
+    {
+        SetDamage(1);
+    }    
 }

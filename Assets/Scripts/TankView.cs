@@ -1,12 +1,18 @@
 
 using UnityEngine;
 
-public class TankView : MonoBehaviour, IMovingControl
+public class TankView : MonoBehaviour
 {
-    TankPresenter _presenter;
+    public TankPresenter _presenter;
 
     public int speed;
     public int rotateSpeed;
+    public RaycastHit hit;
+    public Vector3 fwd;
+    public float power;
+
+    [SerializeField] private Rigidbody _bulet;
+    [SerializeField] private GameObject _buletAnchor;
 
     private void Awake()
     {
@@ -16,8 +22,12 @@ public class TankView : MonoBehaviour, IMovingControl
     private void Update()
     {
         MovingControl(speed);
+        RayCast();
     }
-
+    public virtual void RayCast()
+    {
+        fwd = transform.TransformDirection(Vector3.forward);
+    }
     public virtual void MovingControl(int speed)
     {
         float xDirect = Input.GetAxis("Horizontal");
@@ -40,11 +50,16 @@ public class TankView : MonoBehaviour, IMovingControl
                 targetRotation, rotateSpeed * Time.deltaTime);
         }        
     }
+    public void Fire()
+    {
+        _bulet.GetComponent<MeshRenderer>().enabled = true;
+        _bulet.isKinematic = false;
+        _bulet.AddForce(Vector3.forward * power, ForceMode.Impulse);
+    }
     public void Death()
     {
         Debug.Log("Death");
     }
-
     public void SetHp(int damage)
     {
         Debug.Log(damage);
@@ -53,8 +68,5 @@ public class TankView : MonoBehaviour, IMovingControl
     {
         _presenter.SetDamage(damage);
     }
-    void OnMouseDown()
-    {
-        SetDamage(1);
-    }
+    
 }
