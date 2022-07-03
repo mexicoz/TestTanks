@@ -7,26 +7,42 @@ public class Enemy : TankView
     private float _xDirect;
     private float _zDirect;
     private bool _value;
-    private int _lengthRay = 50;
+    
     private void Start()
     {
         StartCoroutine(IDirection());
+        
     }
     private void OnCollisionEnter(Collision other)
     {
-        _value = !_value;
-        SwitchDirection(_value);
+        //_value = !_value;
+        Reversal(_value);        
     }   
+    
     private void SwitchDirection(bool value)
     {
         switch (value)
         {
             case true:
-                _xDirect = Random.value < 0.5f ? -1 : +1;
+                _xDirect = Random.value < 0.5f ? -1 : 1;
                 _zDirect = 0;
                 break;
             case false:
-                _zDirect = Random.value < 0.5f ? -1 : +1;
+                _zDirect = Random.value < 0.5f ? -1 : 1;
+                _xDirect = 0;
+                break;
+        }
+    }
+    private void Reversal(bool value)
+    {
+        switch (value)
+        {
+            case true:
+                _xDirect = _xDirect > 0 ? -1 : 1;
+                _zDirect = 0;
+                break;
+            case false:
+                _zDirect = _zDirect > 0 ? -1 : 1;
                 _xDirect = 0;
                 break;
         }
@@ -35,7 +51,8 @@ public class Enemy : TankView
     {
         while (true)
         {
-            SwitchDirection(Random.value < 0.5f ? true : false);
+            _value = Random.value < 0.5f ? true : false;
+            SwitchDirection(_value);
 
             yield return new WaitForSeconds(5);
         }       
@@ -43,14 +60,7 @@ public class Enemy : TankView
     public override void RayCast()
     {
         base.RayCast();
-
-        if (Physics.Raycast(transform.position, fwd, out hit, _lengthRay))
-        {
-            if (hit.collider.gameObject.CompareTag("Player"))
-            {
-                _presenter.StartFire();
-            }
-        }
+        
     }
 
     public override void MovingControl(int speed)

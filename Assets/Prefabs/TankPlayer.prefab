@@ -208,7 +208,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rotateSpeed: 500
-  fwd: {x: 0, y: 0, z: 0}
   power: 0
   _bulet: {fileID: 3979028785633432119}
   _buletAnchor: {fileID: 3829529956405402069}

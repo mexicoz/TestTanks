@@ -7,6 +7,7 @@ public class TankModel
     public event Action Death;
     public event Action<int> SetCurrentHp;
     public event Action Fire;
+    public event Action Reverse;
 
     private int _maxHp = 10;
     private int _currentHp;
@@ -27,5 +28,9 @@ public class TankModel
     public void StartFire()
     {
         Fire?.Invoke();
+    }
+    public void StartRevere()
+    {
+        Reverse?.Invoke();
     }
 }
