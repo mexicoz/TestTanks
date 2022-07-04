@@ -7,24 +7,30 @@ public class TankView : MonoBehaviour
     public TankPresenter _presenter;
 
     [SerializeField] public int speed;
-    public int rotateSpeed;
     [SerializeField] public float power;
-    [SerializeField] private Rigidbody _bulet;
     [SerializeField] private GameObject _buletAnchor;
+    [SerializeField] private int _recharge;
+    [SerializeField] public int rotateSpeed;
+    [SerializeField] public PoolObject bulletPool;
+    private GameObject _bullet;
     private int _lengthRay = 80;
     private bool _isRotation;
+    private bool _isShot;
     Vector3 fwd;
     RaycastHit hit;
-
 
     private void Awake()
     {
         _presenter = new TankPresenter(this);
-        _presenter.Subscribe();
+        _presenter.Subscribe();       
     }
     private void Update()
     {
         MovingControl(speed);
+        if (_isShot)
+        {
+            BulletMovement();
+        }
         
         RayCast();
     }
@@ -34,7 +40,7 @@ public class TankView : MonoBehaviour
         if(!_isRotation)
             Debug.DrawRay(transform.position, fwd, Color.green);        
         
-        if (Physics.Raycast(transform.position, fwd, out hit, _lengthRay) && !_isRotation)
+        if (Physics.Raycast(transform.position, fwd, out hit, _lengthRay) && !_isRotation && !_isShot)
         {
             if (hit.collider.gameObject.CompareTag("Player"))
             {
@@ -70,16 +76,21 @@ public class TankView : MonoBehaviour
     }
     IEnumerator IRocketPool()
     {
-        yield return new WaitForSeconds(2);
-        _bulet.isKinematic = true;
-        _bulet.transform.position += _buletAnchor.transform.position;
+        yield return new WaitForSeconds(_recharge);
+        _isShot = false;
+        bulletPool.ReturnPoolObject(_bullet);
     }
+   
     public void Fire()
     {
-        _bulet.GetComponent<MeshRenderer>().enabled = true;
-        _bulet.isKinematic = false;
-        _bulet.AddForce(transform.TransformDirection(Vector3.forward) * power, ForceMode.Impulse);
+        _bullet = bulletPool.SpawnPoolObject(_buletAnchor.transform.position, _buletAnchor.transform.rotation);
+        _isShot = true;
         StartCoroutine(IRocketPool());
+    }
+    private void BulletMovement()
+    {
+        _bullet.GetComponent<Rigidbody>().AddForce(transform.TransformDirection(Vector3.forward)
+            * power, ForceMode.Impulse);
     }
     public void Death()
     {

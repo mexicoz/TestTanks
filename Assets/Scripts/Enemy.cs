@@ -6,17 +6,21 @@ public class Enemy : TankView
 {
     private float _xDirect;
     private float _zDirect;
-    private bool _value;
-    
+    private bool _value;   
+
+
     private void Start()
     {
-        StartCoroutine(IDirection());
+        StartCoroutine(ISwitchDirection());
         
     }
     private void OnCollisionEnter(Collision other)
     {
         //_value = !_value;
-        Reversal(_value);        
+        if (other.gameObject.CompareTag("Player"))
+            SwitchDirection(_value);
+        else
+            Reversal(_value);        
     }   
     
     private void SwitchDirection(bool value)
@@ -47,7 +51,7 @@ public class Enemy : TankView
                 break;
         }
     }
-    IEnumerator IDirection()
+    IEnumerator ISwitchDirection()
     {
         while (true)
         {
@@ -56,11 +60,6 @@ public class Enemy : TankView
 
             yield return new WaitForSeconds(5);
         }       
-    }
-    public override void RayCast()
-    {
-        base.RayCast();
-        
     }
 
     public override void MovingControl(int speed)
