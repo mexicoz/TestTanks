@@ -7,15 +7,15 @@ public class TankView : MonoBehaviour
     public TankPresenter _presenter;
 
     [SerializeField] public int speed;
-    [SerializeField] public float power;
+    [SerializeField] public int speedBullet;
     [SerializeField] private GameObject _buletAnchor;
-    [SerializeField] private int _recharge;
     [SerializeField] public int rotateSpeed;
-    [SerializeField] public PoolObject bulletPool;
+    [SerializeField] private PoolObject bulletPool;
+    [SerializeField] private int _recharge;
     private GameObject _bullet;
     private int _lengthRay = 80;
-    private bool _isRotation;
-    private bool _isShot;
+    public bool isRotation;
+    public bool _isShot;
     Vector3 fwd;
     RaycastHit hit;
 
@@ -32,15 +32,14 @@ public class TankView : MonoBehaviour
             BulletMovement();
         }
         
-        RayCast();
+        ShotEvent();
     }
-    public virtual void RayCast()
+    public virtual void ShotEvent()
     {
         fwd = transform.TransformDirection(Vector3.forward) * _lengthRay;
-        if(!_isRotation)
-            Debug.DrawRay(transform.position, fwd, Color.green);        
-        
-        if (Physics.Raycast(transform.position, fwd, out hit, _lengthRay) && !_isRotation && !_isShot)
+        Debug.DrawRay(transform.position, fwd, Color.green);
+
+        if (Physics.Raycast(transform.position, fwd, out hit, _lengthRay) && !isRotation && !_isShot)
         {
             if (hit.collider.gameObject.CompareTag("Player"))
             {
@@ -69,28 +68,26 @@ public class TankView : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation,
                 targetRotation, rotateSpeed * Time.deltaTime);
             if (targetRotation == transform.rotation)
-                _isRotation = false;
+                isRotation = false;
             else
-                _isRotation = true;
+                isRotation = true;
         }        
     }
-    IEnumerator IRocketPool()
+    IEnumerator IRocketRecharge()
     {
         yield return new WaitForSeconds(_recharge);
-        _isShot = false;
         bulletPool.ReturnPoolObject(_bullet);
-    }
-   
+        _isShot = false;
+    }    
     public void Fire()
     {
-        _bullet = bulletPool.SpawnPoolObject(_buletAnchor.transform.position, _buletAnchor.transform.rotation);
         _isShot = true;
-        StartCoroutine(IRocketPool());
+        _bullet = bulletPool.SpawnPoolObject(_buletAnchor.transform.position, _buletAnchor.transform.rotation);
+        StartCoroutine(IRocketRecharge());
     }
     private void BulletMovement()
     {
-        _bullet.GetComponent<Rigidbody>().AddForce(transform.TransformDirection(Vector3.forward)
-            * power, ForceMode.Impulse);
+        _bullet.transform.Translate(Vector3.forward * speedBullet * Time.deltaTime);
     }
     public void Death()
     {

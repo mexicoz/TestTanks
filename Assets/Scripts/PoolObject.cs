@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,6 @@ public class PoolObject : MonoBehaviour
         {
             _poolList.Add(Instantiate(poolObject));
             _poolList[i].SetActive(false);
-            _poolList[i].transform.parent = transform;
         }
     }
   

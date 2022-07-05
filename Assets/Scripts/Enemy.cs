@@ -16,11 +16,11 @@ public class Enemy : TankView
     }
     private void OnCollisionEnter(Collision other)
     {
-        //_value = !_value;
-        if (other.gameObject.CompareTag("Player"))
-            SwitchDirection(_value);
-        else
-            Reversal(_value);        
+        //if (other.gameObject.CompareTag("Player"))
+        //    SwitchDirection(_value);
+        //else
+        //    Reversal(_value);
+        Reversal(_value);
     }   
     
     private void SwitchDirection(bool value)

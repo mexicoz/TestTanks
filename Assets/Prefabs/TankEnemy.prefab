@@ -224,11 +224,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  power: 10
+  speedBullet: 200
+  power: 2
   _buletAnchor: {fileID: 7301936316671702174}
   _recharge: 2
   rotateSpeed: 500
   bulletPool: {fileID: 5517860152539511963}
+  isRotation: 0
+  _isShot: 0
 --- !u!114 &5517860152539511963
 MonoBehaviour:
   m_ObjectHideFlags: 0
