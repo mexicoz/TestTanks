@@ -225,11 +225,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   speedBullet: 200
-  power: 2
   _buletAnchor: {fileID: 7301936316671702174}
-  _recharge: 2
   rotateSpeed: 500
   bulletPool: {fileID: 5517860152539511963}
+  _recharge: 2
+  _bullet: {fileID: 1777310466109727808, guid: 44e1ffad154f547458af9aec0ada1787, type: 3}
   isRotation: 0
   _isShot: 0
 --- !u!114 &5517860152539511963
@@ -244,7 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462b46c0b4e090a42a3f034970fa05d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolObject: {fileID: 1777310466109727808, guid: 44e1ffad154f547458af9aec0ada1787, type: 3}
   _poolList: []
   poolAmount: 1
 --- !u!1 &3052836598017032967

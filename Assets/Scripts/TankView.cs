@@ -12,26 +12,22 @@ public class TankView : MonoBehaviour
     [SerializeField] public int rotateSpeed;
     [SerializeField] private PoolObject bulletPool;
     [SerializeField] private int _recharge;
-    private GameObject _bullet;
+    [SerializeField] private GameObject _bullet;
     private int _lengthRay = 80;
     public bool isRotation;
-    public bool _isShot;
+    public bool _isRecharge;
     Vector3 fwd;
     RaycastHit hit;
 
     private void Awake()
     {
         _presenter = new TankPresenter(this);
-        _presenter.Subscribe();       
+        _presenter.Subscribe();
+        bulletPool.Init(_bullet);
     }
     private void Update()
     {
-        MovingControl(speed);
-        if (_isShot)
-        {
-            BulletMovement();
-        }
-        
+        MovingControl(speed);        
         ShotEvent();
     }
     public virtual void ShotEvent()
@@ -39,7 +35,7 @@ public class TankView : MonoBehaviour
         fwd = transform.TransformDirection(Vector3.forward) * _lengthRay;
         Debug.DrawRay(transform.position, fwd, Color.green);
 
-        if (Physics.Raycast(transform.position, fwd, out hit, _lengthRay) && !isRotation && !_isShot)
+        if (Physics.Raycast(transform.position, fwd, out hit, _lengthRay) && !isRotation && !_isRecharge)
         {
             if (hit.collider.gameObject.CompareTag("Player"))
             {
@@ -77,17 +73,14 @@ public class TankView : MonoBehaviour
     {
         yield return new WaitForSeconds(_recharge);
         bulletPool.ReturnPoolObject(_bullet);
-        _isShot = false;
+        _isRecharge = false;
     }    
     public void Fire()
     {
-        _isShot = true;
-        _bullet = bulletPool.SpawnPoolObject(_buletAnchor.transform.position, _buletAnchor.transform.rotation);
+        _isRecharge = true;
+        _bullet = bulletPool.SpawnPoolObject(_bullet, _buletAnchor.transform.position, _buletAnchor.transform.rotation);
+        _bullet.GetComponent<Bullet>().Shot(true);       
         StartCoroutine(IRocketRecharge());
-    }
-    private void BulletMovement()
-    {
-        _bullet.transform.Translate(Vector3.forward * speedBullet * Time.deltaTime);
     }
     public void Death()
     {

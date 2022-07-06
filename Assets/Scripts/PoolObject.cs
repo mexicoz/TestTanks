@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class PoolObject : MonoBehaviour
 {
-    public GameObject poolObject;
     [SerializeField] private List<GameObject> _poolList = new List<GameObject>();
     [SerializeField] private int poolAmount;
 
-    private void Start()
+    public void Init(GameObject poolObj)
     {
         for (int i = 0; i < poolAmount; i++)
         {
-            _poolList.Add(Instantiate(poolObject));
+            _poolList.Add(Instantiate(poolObj));
             _poolList[i].SetActive(false);
         }
     }
   
-    public GameObject SpawnPoolObject(Vector3 position, Quaternion rotation)
+    public GameObject SpawnPoolObject(GameObject poolObj, Vector3 position, Quaternion rotation)
     {
         GameObject toReturn;
 
@@ -28,7 +27,7 @@ public class PoolObject : MonoBehaviour
         }
         else
         {
-            toReturn = Instantiate(poolObject);
+            toReturn = Instantiate(poolObj);
             toReturn.transform.parent = transform;
         }
 
