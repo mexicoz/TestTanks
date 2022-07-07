@@ -6,16 +6,12 @@ public class TankView : MonoBehaviour
 {
     public TankPresenter _presenter;
 
-    [SerializeField] public int speed;
-    [SerializeField] public int speedBullet;
+    [SerializeField] private TankData _tankData;
     [SerializeField] private GameObject _buletAnchor;
-    [SerializeField] public int rotateSpeed;
     [SerializeField] private PoolObject bulletPool;
-    [SerializeField] private int _recharge;
-    [SerializeField] private GameObject _bullet;
-    private int _lengthRay = 80;
-    public bool isRotation;
-    public bool _isRecharge;
+    public bool isRecharge { get; set; }
+    
+    private bool isRotation;
     Vector3 fwd;
     RaycastHit hit;
 
@@ -23,19 +19,19 @@ public class TankView : MonoBehaviour
     {
         _presenter = new TankPresenter(this);
         _presenter.Subscribe();
-        bulletPool.Init(_bullet);
+        bulletPool.Init(_tankData.bullet);
     }
     private void Update()
     {
-        MovingControl(speed);        
+        MovingControl(_tankData.speed);        
         ShotEvent();
     }
     public virtual void ShotEvent()
     {
-        fwd = transform.TransformDirection(Vector3.forward) * _lengthRay;
+        fwd = transform.TransformDirection(Vector3.forward) * _tankData.rayCastLenght;
         Debug.DrawRay(transform.position, fwd, Color.green);
 
-        if (Physics.Raycast(transform.position, fwd, out hit, _lengthRay) && !isRotation && !_isRecharge)
+        if (Physics.Raycast(transform.position, fwd, out hit, _tankData.rayCastLenght) && !isRotation && !isRecharge)
         {
             if (hit.collider.gameObject.CompareTag("Player"))
             {
@@ -62,25 +58,25 @@ public class TankView : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirect, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation,
-                targetRotation, rotateSpeed * Time.deltaTime);
+                targetRotation, _tankData.rotateSpeed * Time.deltaTime);
             if (targetRotation == transform.rotation)
                 isRotation = false;
             else
                 isRotation = true;
         }        
     }
-    IEnumerator IRocketRecharge()
+    IEnumerator IRocketRecharge(GameObject bullet)
     {
-        yield return new WaitForSeconds(_recharge);
-        bulletPool.ReturnPoolObject(_bullet);
-        _isRecharge = false;
+        yield return new WaitForSeconds(_tankData.recharge);
+        bulletPool.ReturnPoolObject(bullet);
+        isRecharge = false;
     }    
     public void Fire()
     {
-        _isRecharge = true;
-        _bullet = bulletPool.SpawnPoolObject(_bullet, _buletAnchor.transform.position, _buletAnchor.transform.rotation);
-        _bullet.GetComponent<Bullet>().Shot(true);       
-        StartCoroutine(IRocketRecharge());
+        isRecharge = true;
+        var bullet = bulletPool.SpawnPoolObject(_tankData.bullet, _buletAnchor.transform.position, _buletAnchor.transform.rotation);
+        bullet.GetComponent<Bullet>().Shot(true);       
+        StartCoroutine(IRocketRecharge(bullet));
     }
     public void Death()
     {

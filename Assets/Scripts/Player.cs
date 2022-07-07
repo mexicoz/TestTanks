@@ -9,7 +9,7 @@ public class Player : TankView
     }
     public override void ShotEvent()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && !_isRecharge)
+        if (Input.GetKey(KeyCode.Mouse0) && !isRecharge)
         {
             _presenter.StartFire();
         }
