@@ -193,8 +193,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.06, y: 1, z: 1.26}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.1295942, y: 3.178406, z: 1.26}
+  m_Center: {x: -0.0024526564, y: 1.0892017, z: 0}
 --- !u!54 &-1291843805581230518
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -226,9 +226,6 @@ MonoBehaviour:
   _tankData: {fileID: 11400000, guid: 5d05185417ea1a349b58cbaa545cd6bb, type: 2}
   _buletAnchor: {fileID: 3829529956405402069}
   bulletPool: {fileID: 8298456382439873681}
-  _bullet: {fileID: 1777310466109727808, guid: 44e1ffad154f547458af9aec0ada1787, type: 3}
-  isRotation: 0
-  _isRecharge: 0
 --- !u!114 &8298456382439873681
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 5517860152539511963}
   m_Layer: 0
   m_Name: TankEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,8 +193,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.08, y: 1.0253057, z: 1.4646673}
-  m_Center: {x: 0, y: 0.012652701, z: 0.14466652}
+  m_Size: {x: 1.08, y: 3.47072, z: 1.4646673}
+  m_Center: {x: 0, y: 1.2353584, z: 0.14466652}
 --- !u!54 &3842839053654977170
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -226,9 +226,6 @@ MonoBehaviour:
   _tankData: {fileID: 11400000, guid: 7b2dc36abbfd88443a99736c9f6c03ae, type: 2}
   _buletAnchor: {fileID: 7301936316671702174}
   bulletPool: {fileID: 5517860152539511963}
-  _bullet: {fileID: 1777310466109727808, guid: 44e1ffad154f547458af9aec0ada1787, type: 3}
-  isRotation: 0
-  _isRecharge: 0
 --- !u!114 &5517860152539511963
 MonoBehaviour:
   m_ObjectHideFlags: 0

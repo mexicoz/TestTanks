@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField]
-    private BulletData bulletData;
+    [SerializeField] private BulletData bulletData;
+    [SerializeField] private string collisionObject;
     private bool _isShot;
 
     private void Update()
@@ -21,5 +21,12 @@ public class Bullet : MonoBehaviour
     public void Shot(bool shot)
     {
         _isShot = shot;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(collisionObject))
+        {
+            collision.gameObject.GetComponent<TankView>().SetDamage(bulletData.atackDamage);
+        }
     }
 }

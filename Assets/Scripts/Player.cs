@@ -13,6 +13,12 @@ public class Player : TankView
         {
             _presenter.StartFire();
         }
-    }   
+    }
+    public override void Death()
+    {
+        base.Death();
+        Destroy(this.gameObject);
+        GameManager.Instance.SpawnPlayer();
+    }
 
 }

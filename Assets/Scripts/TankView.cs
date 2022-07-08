@@ -75,16 +75,17 @@ public class TankView : MonoBehaviour
     {
         isRecharge = true;
         var bullet = bulletPool.SpawnPoolObject(_tankData.bullet, _buletAnchor.transform.position, _buletAnchor.transform.rotation);
-        bullet.GetComponent<Bullet>().Shot(true);       
+        bullet.GetComponent<Bullet>().Shot(true);
         StartCoroutine(IRocketRecharge(bullet));
     }
-    public void Death()
+    public virtual void Death()
     {
-        //Debug.Log("Death");
+        Debug.Log("You are loose!");
     }
     public void SetHp(int damage)
     {
         //Debug.Log(damage);
+
     }
     public void SetDamage(int damage)
     {

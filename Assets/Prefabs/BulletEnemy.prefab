@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 683080373431964319}
   - component: {fileID: 6688177646268333424}
   m_Layer: 0
-  m_Name: Rocket
+  m_Name: BulletEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,3 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletData: {fileID: 11400000, guid: 2e7a0cc5737e7f140b5d18dece14b858, type: 2}
+  collisionObject: Player

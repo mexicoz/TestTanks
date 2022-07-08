@@ -61,7 +61,12 @@ public class Enemy : TankView
             yield return new WaitForSeconds(5);
         }       
     }
-
+    public override void Death()
+    {
+        Debug.Log("Well Done!");
+        Destroy(this.gameObject);
+        GameManager.Instance.SpawnEnemy();
+    }
     public override void MovingControl(int speed)
     {
         float xDirect = _xDirect;
