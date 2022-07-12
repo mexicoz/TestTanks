@@ -223,9 +223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc8ba9342c39d6439310c494b815f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tankData: {fileID: 11400000, guid: 5d05185417ea1a349b58cbaa545cd6bb, type: 2}
+  tankData: {fileID: 11400000, guid: 5d05185417ea1a349b58cbaa545cd6bb, type: 2}
   _buletAnchor: {fileID: 3829529956405402069}
-  bulletPool: {fileID: 8298456382439873681}
+  _bulletPool: {fileID: 8298456382439873681}
 --- !u!114 &8298456382439873681
 MonoBehaviour:
   m_ObjectHideFlags: 0

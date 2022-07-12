@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag(collisionObject))
         {
             collision.gameObject.GetComponent<TankView>().SetDamage(bulletData.atackDamage);
+            gameObject.SetActive(false);
         }
     }
 }

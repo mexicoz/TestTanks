@@ -16,9 +16,17 @@ public class Enemy : TankView
     }
     private void OnCollisionEnter(Collision other)
     {
+        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<TankView>().SetDamage(tankData.atackDamageCollision);
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            SwitchDirection(_value);
+        }
         Reversal(_value);
-    }   
-    
+    }    
     private void SwitchDirection(bool value)
     {
         switch (value)
@@ -57,6 +65,7 @@ public class Enemy : TankView
             yield return new WaitForSeconds(5);
         }       
     }
+    
     public override void Death()
     {
         base.Death();

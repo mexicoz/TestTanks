@@ -15,7 +15,7 @@ public class Player : TankView
     {
         base.Death();
         Debug.Log("You are loose!");
-        GameManager.Instance.SpawnPlayer();
+        GameManager.Instance.SpawnPlayer(1);
     }
     public override void MovingControl(int speed)
     {
