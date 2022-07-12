@@ -16,10 +16,6 @@ public class Enemy : TankView
     }
     private void OnCollisionEnter(Collision other)
     {
-        //if (other.gameObject.CompareTag("Player"))
-        //    SwitchDirection(_value);
-        //else
-        //    Reversal(_value);
         Reversal(_value);
     }   
     
@@ -50,7 +46,7 @@ public class Enemy : TankView
                 _xDirect = 0;
                 break;
         }
-    }
+    }    
     IEnumerator ISwitchDirection()
     {
         while (true)
@@ -63,8 +59,8 @@ public class Enemy : TankView
     }
     public override void Death()
     {
-        Debug.Log("Well Done!");
-        Destroy(this.gameObject);
+        base.Death();
+        Debug.Log("Well Done!");        
         GameManager.Instance.SpawnEnemy();
     }
     public override void MovingControl(int speed)

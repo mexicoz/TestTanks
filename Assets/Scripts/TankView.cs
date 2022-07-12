@@ -41,10 +41,7 @@ public class TankView : MonoBehaviour
     }
     public virtual void MovingControl(int speed)
     {
-        float xDirect = Input.GetAxis("Horizontal");
-        float zDirect = Input.GetAxis("Vertical");
 
-        Moving(speed, xDirect, zDirect);
     }
 
     public void Moving(int speed, float xDirect, float zDirect )
@@ -65,22 +62,27 @@ public class TankView : MonoBehaviour
                 isRotation = true;
         }        
     }
-    IEnumerator IRocketRecharge(GameObject bullet)
+    IEnumerator IRocketRecharge()
     {
-        yield return new WaitForSeconds(_tankData.recharge);
-        bulletPool.ReturnPoolObject(bullet);
+        yield return new WaitForSeconds(_tankData.recharge);        
         isRecharge = false;
-    }    
+    } 
+    IEnumerator IRocketLive(GameObject bullet)
+    {
+        yield return new WaitForSeconds(5);
+        bulletPool.ReturnPoolObject(bullet);
+    }
     public void Fire()
     {
         isRecharge = true;
         var bullet = bulletPool.SpawnPoolObject(_tankData.bullet, _buletAnchor.transform.position, _buletAnchor.transform.rotation);
         bullet.GetComponent<Bullet>().Shot(true);
-        StartCoroutine(IRocketRecharge(bullet));
+        StartCoroutine(IRocketRecharge());
+        StartCoroutine(IRocketLive(bullet));
     }
     public virtual void Death()
     {
-        Debug.Log("You are loose!");
+        Destroy(this.gameObject);        
     }
     public void SetHp(int damage)
     {

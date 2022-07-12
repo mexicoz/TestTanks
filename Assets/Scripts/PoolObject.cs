@@ -27,8 +27,7 @@ public class PoolObject : MonoBehaviour
         }
         else
         {
-            toReturn = Instantiate(poolObj);
-            toReturn.transform.parent = transform;
+            toReturn = Instantiate(poolObj);            
         }
 
         toReturn.SetActive(true);
