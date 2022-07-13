@@ -6,13 +6,11 @@ public class Enemy : TankView
 {
     private float _xDirect;
     private float _zDirect;
-    private bool _value;   
-
+    private bool _value;
 
     private void Start()
     {
         StartCoroutine(ISwitchDirection());
-        
     }
     private void OnCollisionEnter(Collision other)
     {
@@ -26,7 +24,9 @@ public class Enemy : TankView
             SwitchDirection(_value);
         }
         Reversal(_value);
-    }    
+    }
+
+    // Changing direction when collision with other enemies
     private void SwitchDirection(bool value)
     {
         switch (value)
@@ -41,6 +41,8 @@ public class Enemy : TankView
                 break;
         }
     }
+
+    // Changing direction when collision a wall
     private void Reversal(bool value)
     {
         switch (value)

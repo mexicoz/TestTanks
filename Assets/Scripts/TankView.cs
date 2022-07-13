@@ -6,14 +6,14 @@ public class TankView : MonoBehaviour
 {
     public TankPresenter _presenter;
     public TankData tankData;
+    public bool isRecharge { get; set; }
 
     [SerializeField] private GameObject _buletAnchor;
     [SerializeField] private PoolObject _bulletPool;
-    public bool isRecharge { get; set; }
     
     private bool isRotation;
-    Vector3 fwd;
-    RaycastHit hit;
+    private Vector3 fwd;
+    private RaycastHit hit;
 
     private void Awake()
     {

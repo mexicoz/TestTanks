@@ -16,6 +16,6 @@ MonoBehaviour:
   _speed: 10
   _rotateSpeed: 500
   _recharge: 2
-  _bullet: {fileID: 1777310466109727808, guid: e7682a324ab91554f9742ff53a47d32a, type: 3}
   _rayCastLength: 80
   _atackDamageCollision: 10
+  _bullet: {fileID: 1777310466109727808, guid: e7682a324ab91554f9742ff53a47d32a, type: 3}
