@@ -11,13 +11,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] _spawnPointPlayer;
     [SerializeField] private TMP_Text _playerCountText;
     [SerializeField] private TMP_Text _enemyCountText;
-    private int _playerCount = -1;
+    [SerializeField] private DataController dataController;
+
+    private int _playerCount;
     private int _enemyCount;
 
     public static GameManager Instance { get; private set; }
 
     private void Awake()
     {
+
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -26,27 +29,45 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        dataController.setPlayerCount += SetPlayerCount;
+        dataController.setEnemyCount += SetEnemyCount;
     }
 
     private void Start()
     {
-        SpawnPlayer(0);
+        Instantiate(_player, ShoosPlayerSpawnPoint(), Quaternion.identity);
 
         foreach (var item in _spawnPointsEnemy)
         {
             Instantiate(_enemy, item.transform.position, Quaternion.identity);
-        };
+        };               
+    }
+    private void SetPlayerCount(int playerCount)
+    {
+        _playerCount = playerCount;
+        _playerCountText.text = _playerCount.ToString();
+    }
+    private void SetEnemyCount(int enemyCount)
+    {
+        _enemyCount = enemyCount;
+        _enemyCountText.text = _enemyCount.ToString();
     }
     public void SpawnPlayer(float timeRes)
     {
         _playerCount++;
         _playerCountText.text = _playerCount.ToString();
+
+        dataController.SetPlayerData(_playerCount);
+
         StartCoroutine(IRespawnPlayer(timeRes));
     }
     public void SpawnEnemy()
     {
         _enemyCount++;
         _enemyCountText.text = _enemyCount.ToString();
+
+        dataController.SetEnemyData(_enemyCount);
+
         StartCoroutine(IRespawnEnemy());
     }
     IEnumerator IRespawnEnemy()
