@@ -16,5 +16,7 @@ MonoBehaviour:
   _speed: 10
   _rotateSpeed: 500
   _recharge: 1
-  _bullet: {fileID: 1777310466109727808, guid: 44e1ffad154f547458af9aec0ada1787, type: 3}
   _rayCastLength: 80
+  _atackDamageCollision: 0
+  _bullet: {fileID: 1777310466109727808, guid: 44e1ffad154f547458af9aec0ada1787, type: 3}
+  _tankPrefab: {fileID: 823067563179371268, guid: 218507336d919274096bd53f406bdf7e, type: 3}
